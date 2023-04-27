@@ -67,7 +67,7 @@ const createReaction = trigger => async e => {
     span.className = 'artdeco-button__text react-button__text react-button__text--curious'
     span.textContent = 'Curious'
 
-    wrapper.querySelector('svg, img').replaceWith(img)
+    wrapper.querySelector('svg, img')?.replaceWith(img)
  
     // close popup
     const menu = document.querySelector('.reactions-menu')
