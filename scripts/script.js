@@ -36,9 +36,9 @@ const createReaction = trigger => async e => {
     const pressed = trigger.classList.contains('react-button--active')
 
     const urnElement = trigger.closest('[data-id], [data-urn]')
-    if(!urnElement)
+    if (!urnElement)
         return
-        
+
     const urn = urnElement.dataset.id ?? urnElement.dataset.urn
 
     // the MAYBE reaction only seems to work with the update API, so we need to like it first
@@ -56,7 +56,6 @@ const createReaction = trigger => async e => {
     trigger.setAttribute('aria-pressed', 'true')
 
     // update UI
-    // FIXME: the text is no longer in sync when updating the reaction
     const wrapper = trigger.querySelector('div.artdeco-button__text')
 
     const img = document.createElement('img')
@@ -65,7 +64,12 @@ const createReaction = trigger => async e => {
 
     const span = wrapper.querySelector('span.react-button__text')
     span.className = 'artdeco-button__text react-button__text react-button__text--curious'
-    span.textContent = 'Curious'
+
+    for (const text of span.childNodes) {
+        if(text.textContent.trim()) {
+            text.textContent = 'Curious'
+        }
+    }
 
     wrapper.querySelector('svg, img')?.replaceWith(img)
  
